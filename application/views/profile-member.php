@@ -1,0 +1,213 @@
+<div class="col-md-7 col-xl-6">
+    <main>
+        <?php if ($this->session->userdata('akses_level') == "Member" && $this->session->userdata('id') == $member_details->id) { ?>
+            <button class="c-btn c-btn--info" style="float:right;" data-toggle="modal" onclick="edit_member('<?php echo $member_details->id ?>')"><i class="fa fa-pencil u-mr-xsmall"></i>Edit Profil</button>
+        <?php }; ?>
+        <h2 class="u-h3 u-mb-small">Profil Member</h2>
+
+        <div class="c-card u-p-medium u-text-small u-mb-small">
+            <h6 class="u-text-bold">Informasi Member</h6>
+
+            <dl class="u-flex u-pv-small u-border-bottom">
+                <dt class="u-width-25">Nama</dt>
+                <dd><?php echo $member_details->nama ?></dd>
+            </dl>
+
+            <dl class="u-flex u-pv-small u-border-bottom">
+                <dt class="u-width-25">Jenis Kelamin</dt>
+                <dd><?php echo $member_details->jenis_kelamin ?></dd>
+            </dl>
+
+            <dl class="u-flex u-pv-small u-border-bottom">
+                <dt class="u-width-25">Email</dt>
+                <dd><?php echo $member_details->jenis_kelamin ?></dd>
+            </dl>
+            <dl class="u-flex u-pv-small u-border-bottom">
+                <dt class="u-width-25">No. Telepon</dt>
+                <dd><?php echo $member_details->no_telepon ?></dd>
+            </dl>
+            <dl class="u-flex u-pv-small u-border-bottom">
+                <dt class="u-width-25">Alamat</dt>
+                <dd><?php echo $member_details->alamat ?></dd>
+            </dl>
+        </div>
+    </main>
+</div>
+
+<div class="col-md-5 col-xl-3 u-mb-medium u-hidden-down@tablet">
+    <div class="c-profile-card">
+
+        <div class="c-profile-card__user" style="top:0px;margin-left:100px;">
+            <div class="c-profile-card__avatar">
+                <img src="<?php echo base_url('resources/img/member_photo/'); ?><?php echo $member_details->foto ?>" alt="Adam's image">
+            </div>
+        </div>
+        <div class="col-12">
+            <br>
+            <?php if ($this->session->userdata('akses_level') == "Member" && $this->session->userdata('id') == $member_details->id) { ?>
+                <button class="c-btn c-btn--info c-btn--fullwidth" data-toggle="modal" onclick="edit_photo('<?php echo $member_details->id ?>')"><i class="fa fa-photo u-mr-xsmall"></i>Ganti Foto</button>
+            <?php }; ?>
+
+        </div>
+    </div>
+    <!--// .c-profile -->
+
+</div>
+</div>
+</div>
+
+<script src="<?php echo base_url('resources/'); ?>js/main.min.js"></script>
+</body>
+
+<!-- Modal Member -->
+<div class="c-modal modal fade" id="edit-profile" tabindex="-1" role="dialog" aria-labelledby="edit-profile" data-backdrop="static">
+    <div class="c-modal__dialog modal-dialog" role="document">
+        <div class="c-modal__content">
+
+            <div class="c-modal__header">
+                <h3 class="c-modal__title">Edit Member</h3>
+
+                <span class="c-modal__close" data-dismiss="modal" aria-label="Close">
+                    <i class="fa fa-close"></i>
+                </span>
+            </div>
+
+            <div class="c-modal__subheader">
+                <p>Lengkapi data diri member berikut ini.</p>
+            </div>
+
+            <div class="c-modal__body">
+                <div class="row">
+                    <div class="col-12">
+                        <form class="" action="<?php echo site_url('member/edit_member') ?>" method="post">
+
+                            <div class="c-field u-mb-small">
+                                <input class="c-input" type="hidden" name="edit_id" id="edit_id" placeholder="" value="">
+                                <label class="c-field__label" for="edit_nama">Nama Lengkap</label>
+                                <input class="c-input" type="text" name="edit_nama" id="edit_nama" placeholder="" value="">
+                            </div>
+                            <div class="c-field u-mb-small">
+                                <label class="c-field__label" for="edit_jenis_kelamin">Jenis Kelamin</label>
+                                <select class="c-select" name="edit_jenis_kelamin" id="edit_jenis_kelamin" value="" style="width:100%;">
+                                    <option disabled>Pilih Jenis Kelamin</option>
+                                    <option value="Perempuan">Perempuan</option>
+                                    <option value="Laki-laki">Laki-laki</option>
+                                </select>
+                            </div>
+                            <div class="c-field u-mb-small">
+                                <label class="c-field__label" for="edit_alamat">Alamat</label>
+                                <textarea class="c-input" name="edit_alamat" id="edit_alamat"></textarea>
+                            </div>
+                            <div class="c-field u-mb-small">
+                                <label class="c-field__label" for="edit_email">Email</label>
+                                <input class="c-input" type="text" name="edit_email" id="edit_email" placeholder="" value="">
+                            </div>
+                            <div class="c-field u-mb-small">
+                                <label class="c-field__label" for="edit_no_telepon">Nomor Telepon</label>
+                                <input class="c-input" type="text" name="edit_no_telepon" id="edit_no_telepon" placeholder="" value="">
+                            </div>
+                            <div class="c-field u-mb-small">
+                                <label class="c-field__label" for="edit_password">Password</label>
+                                <input class="c-input" type="password" name="edit_password" id="edit_password" placeholder="" value="">
+                            </div>
+                            <div class="c-field u-mb-small">
+                                <input class="c-btn c-btn--success c-btn--fullwidth" type="submit" name="" value="Edit Member">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+        </div><!-- // .c-modal__content -->
+    </div><!-- // .c-modal__dialog -->
+</div><!-- // .c-modal -->
+
+
+<!-- Modal Member -->
+<div class="c-modal modal fade" id="edit-photo" tabindex="-1" role="dialog" aria-labelledby="edit-foto" data-backdrop="static">
+    <div class="c-modal__dialog modal-dialog" role="document">
+        <div class="c-modal__content">
+
+            <div class="c-modal__header">
+                <h3 class="c-modal__title">Ganti Foto</h3>
+
+                <span class="c-modal__close" data-dismiss="modal" aria-label="Close">
+                    <i class="fa fa-close"></i>
+                </span>
+            </div>
+
+            <div class="c-modal__subheader">
+                <p>Pilih file untuk mengganti profil foto</p>
+            </div>
+
+            <div class="c-modal__body">
+                <div class="row">
+                    <div class="col-12">
+                        <form class="" action="<?php echo site_url('member/edit_photo') ?>" method="post" enctype="multipart/form-data">
+
+                            <div class="c-field u-mb-small">
+                                <input class="c-input" type="hidden" name="edit_photo_id" id="edit_photo_id" placeholder="" value="">
+                                <label class="c-field__label" for="edit_nama">File Foto</label>
+                                <!-- <input class="c-input" type="text" name="edit_nama" id="edit_nama" placeholder="" value=""> -->
+                                <input type="file" name="foto" id="foto" value="">
+                            </div>
+                            <div class="c-field u-mb-small">
+                                <input class="c-btn c-btn--success c-btn--fullwidth" type="submit" name="" value="Upload Foto">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+        </div><!-- // .c-modal__content -->
+    </div><!-- // .c-modal__dialog -->
+</div><!-- // .c-modal -->
+
+<script type="text/javascript">
+    function edit_member(id) {
+        //Ajax Load data from ajax
+        $.ajax({
+            url: "<?php echo site_url('administrator/members/get_detail_member') ?>/" + id,
+            type: "GET",
+            dataType: "JSON",
+            success: function(data) {
+                $('[name="edit_id"]').val(data.id);
+                $('[name="edit_nama"]').val(data.nama);
+                $('[name="edit_jenis_kelamin"]').val(data.jenis_kelamin);
+                $('[name="edit_jenis_kelamin"]').select2().trigger('change');
+                $('[name="edit_jenis_kelamin"]').select2({
+                    minimumResultsForSearch: Infinity
+                });
+                $('[name="edit_alamat"]').val(data.alamat);
+                $('[name="edit_email"]').val(data.email);
+                $('[name="edit_no_telepon"]').val(data.no_telepon);
+                $('[name="edit_password"]').val(data.password);
+                console.log(data.jenis_kelamin);
+                $('#edit-profile').modal('show'); // show bootstrap modal when complete loaded
+
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                alert('Error get data from ajax');
+            }
+        });
+    }
+
+    function edit_photo(id) {
+        //Ajax Load data from ajax
+        $.ajax({
+            url: "<?php echo site_url('administrator/members/get_detail_member') ?>/" + id,
+            type: "GET",
+            dataType: "JSON",
+            success: function(data) {
+                $('[name="edit_photo_id"]').val(data.id);
+                $('#edit-photo').modal('show'); // show bootstrap modal when complete loaded
+
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                alert('Error get data from ajax');
+            }
+        });
+    }
+</script>
+
+</html>
